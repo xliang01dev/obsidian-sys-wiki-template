@@ -1,0 +1,16 @@
+# Ignore all Obsidian configuration by default
+.obsidian/*
+
+# But include specific configs
+!.obsidian/app.json
+!.obsidian/appearance.json
+!.obsidian/community-plugins.json
+!.obsidian/core-plugins.json
+
+# Consider ignoring hotkeys/workspace if they differ per machine:
+.obsidian/hotkeys.json
+.obsidian/workspace.json
+
+# Local Claude settings (machine-specific, may contain secrets)
+.claude/settings.local.json
+.env

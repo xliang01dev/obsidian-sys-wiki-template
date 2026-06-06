@@ -1,0 +1,39 @@
+{
+  "defaultMode": "default",
+  "permissions": {
+    "allow": [
+      "Read(./**)",
+      "Write(./**)",
+      "Edit(./**)",
+      "LS(./**)",
+      "Glob(./**)",
+      "Grep(./**)",
+      "Mkdir(./**)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Read(**/.env)",
+      "Bash(git push:*)"
+    ],
+    "ask": [],
+    "deny": [
+      "WebFetch",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(sftp:*)",
+      "Bash(rsync:*)",
+      "Bash(sudo:*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/Secrets/**)",
+      "Read(~/Private/**)",
+      "Read(**/.env.*)",
+      "Read(**/secrets.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  }
+}
