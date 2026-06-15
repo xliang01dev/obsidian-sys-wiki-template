@@ -121,7 +121,7 @@ OBSIDIAN_API_KEY=abcdefg-123456 # Settings → Local REST API → API Key</code>
 <td>
 <ol style="margin:0; padding-left:0; list-style-position:inside">
 <li><a href="https://github.com/tobi/qmd">Download</a></li>
-<li>Register the vault as a qmd collection:<pre><code>qmd collection add $(basename "$PWD") .</code></pre></li>
+<li>Register the vault as a qmd collection:<pre><code>(REPO=$(basename "$PWD") && cd .. && qmd collection add "$REPO")</code></pre></li>
 <li>Index and embed the vault (downloads a ~270 MB model on first run; re-run after large ingests):<pre><code>qmd update && qmd embed</code></pre></li>
 <li>Add to <code>.env</code>:<pre><code>grep -q "QMD_INSTALL_PATH" .env || echo "QMD_INSTALL_PATH=$(which qmd)" >> .env</code></pre></li>
 </ol>
