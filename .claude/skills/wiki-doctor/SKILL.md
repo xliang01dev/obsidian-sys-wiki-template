@@ -1,7 +1,7 @@
 ---
 name: wiki-doctor
 description: Maintain wiki integrity through linting and self-healing. Repair broken links, detect conflicting content, reduce duplication, and converge notes toward clear canonical pages.
-***
+---
 
 # Wiki Doctor
 

@@ -1,7 +1,7 @@
 ---
 name: wiki-ingest
 description: Ingest curated source files from `raw/` into the wiki. Read new or changed local source files, preserve them as evidence, and update the relevant canonical `wiki/` pages.
-***
+---
 
 # Wiki Ingest
 

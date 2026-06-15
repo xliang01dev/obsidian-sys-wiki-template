@@ -2,7 +2,7 @@
   "mcpServers": {
     "obsidian": {
       "type": "http",
-      "url": "${PROTOCOL}://${HOST}:${PORT}/mcp/",
+      "url": "${OBSIDIAN_PROTOCOL}://${OBSIDIAN_HOST}:${OBSIDIAN_PORT}/mcp/",
       "headers": {
         "Authorization": "Bearer ${OBSIDIAN_API_KEY}"
       }

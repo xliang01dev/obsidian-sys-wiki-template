@@ -1,7 +1,7 @@
 ---
 name: wiki-query
 description: Answer questions from the wiki by treating `wiki/` as the primary knowledge layer, using `raw/` only as supporting evidence when needed, and surfacing gaps, conflicts, and next-page improvements.
-***
+---
 
 # Wiki Query
 
