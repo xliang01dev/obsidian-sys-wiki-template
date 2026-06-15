@@ -71,64 +71,64 @@ The skill walks you through each dependency one step at a time - checking what i
 
 ### Option 2 - Manual install
 
-<table>
-<thead>
-<tr><th>Tool</th><th>Description</th><th>Install instructions</th></tr>
-</thead>
-<tbody>
-<tr>
-<td style="white-space: nowrap"><a href="https://nodejs.org/">Node.js</a></td>
-<td>JavaScript runtime; required to install qmd via npm (v18 or later)</td>
-<td><a href="https://nodejs.org/en/download">Download v18+</a></td>
-</tr>
-<tr>
-<td style="white-space: nowrap"><a href="https://direnv.net/docs/installation.html">direnv</a></td>
-<td>Shell extension that loads <code>.env</code> automatically when you enter the project directory</td>
-<td>
-<ol style="margin:0; padding-left:0; list-style-position:inside">
-<li><a href="https://direnv.net/docs/installation.html">Install</a> and add the <a href="https://direnv.net/docs/hook.html">shell hook</a> for your shell</li>
-<li>Add to <code>~/.config/direnv/direnv.toml</code> (create if it doesn't exist):<pre><code>[global]
-load_dotenv = true</code></pre></li>
-<li>Run or re-run any time <code>.env</code> is updated:<pre><code>direnv allow</code></pre></li>
-</ol>
-</td>
-</tr>
-<tr>
-<td style="white-space: nowrap"><a href="https://docs.anthropic.com/en/docs/claude-code/getting-started">Claude Code</a></td>
-<td>The CLI used to run the wiki skills</td>
-<td>Follow the <a href="https://docs.anthropic.com/en/docs/claude-code/getting-started">getting started guide</a></td>
-</tr>
-<tr>
-<td style="white-space: nowrap"><a href="https://obsidian.md/">Obsidian</a></td>
-<td>The note-taking app this vault runs inside; must be running for the MCP server to connect</td>
-<td>
-<ol style="margin:0; padding-left:0; list-style-position:inside">
-<li><a href="https://obsidian.md/">Download</a> and open this repo as a vault</li>
-<li>Install the <strong>Local REST API</strong> community plugin</li>
-<li>Under <strong>Settings → Local REST API</strong>, enable <strong>"Enable Non-Encrypted (HTTP) Server"</strong> (HTTP required - MCP clients cannot verify the self-signed HTTPS cert)</li>
-<li>Note your <strong>API key</strong> and <strong>port</strong> (default: <code>27123</code>) - each vault should use its own port</li>
-<li>Copy the sample env file:<pre><code>cp .env.sample .env</code></pre></li>
-<li>Open <code>.env</code> and fill in your values - find your API key and port under <strong>Settings → Local REST API</strong> in Obsidian:<pre><code>OBSIDIAN_PROTOCOL=http
-OBSIDIAN_HOST=127.0.0.1         # IP where Obsidian is running; 127.0.0.1 if local
-OBSIDIAN_PORT=27123             # Settings → Local REST API → Port
-OBSIDIAN_API_KEY=abcdefg-123456 # Settings → Local REST API → API Key</code></pre></li>
-</ol>
-</td>
-</tr>
-<tr>
-<td style="white-space: nowrap"><a href="https://github.com/tobi/qmd">@tobilu/qmd</a></td>
-<td>On-device hybrid search engine that powers semantic wiki queries</td>
-<td>
-<ol style="margin:0; padding-left:0; list-style-position:inside">
-<li><a href="https://github.com/tobi/qmd">Download</a></li>
-<li>Register the vault as a qmd collection:<pre><code>(REPO=$(basename "$PWD") && cd .. && qmd collection add "$REPO")</code></pre></li>
-<li>Index and embed the vault (downloads a ~270 MB model on first run; re-run after large ingests):<pre><code>qmd update && qmd embed</code></pre></li>
-<li>Add to <code>.env</code>:<pre><code>grep -q "QMD_INSTALL_PATH" .env || echo "QMD_INSTALL_PATH=$(which qmd)" >> .env</code></pre></li>
-</ol>
-</td>
-</tr>
-</tbody>
-</table>
+| Tool | Description |
+|---|---|
+| [Node.js](https://nodejs.org/) | JavaScript runtime; required to install qmd via npm (v18 or later) |
+| [direnv](https://direnv.net/docs/installation.html) | Shell extension that loads `.env` automatically when you enter the project directory |
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code/getting-started) | The CLI used to run the wiki skills |
+| [Obsidian](https://obsidian.md/) | The note-taking app this vault runs inside; must be running for the MCP server to connect |
+| [@tobilu/qmd](https://github.com/tobi/qmd) | On-device hybrid search engine that powers semantic wiki queries |
+
+#### 1. Node.js: [Download v18+](https://nodejs.org/en/download)
+
+#### 2. direnv
+
+1. [Install](https://direnv.net/docs/installation.html) and add the [shell hook](https://direnv.net/docs/hook.html) for your shell.
+2. Add to `~/.config/direnv/direnv.toml` (create if it doesn't exist):
+   ```toml
+   [global]
+   load_dotenv = true
+   ```
+3. Run (or re-run any time `.env` is updated):
+   ```bash
+   direnv allow
+   ```
+
+#### 3. Claude Code: Follow the [getting started guide](https://docs.anthropic.com/en/docs/claude-code/getting-started)
+
+#### 4. Obsidian
+
+1. [Download](https://obsidian.md/) and open this repo as a vault.
+2. Install the **Local REST API** community plugin.
+3. Under **Settings → Local REST API**, enable **"Enable Non-Encrypted (HTTP) Server"** (HTTP required; MCP clients cannot verify the self-signed HTTPS cert).
+4. Note your **API key** and **port** (default: `27123`); each vault should use its own port.
+5. Copy the sample env file:
+   ```bash
+   cp .env.sample .env
+   ```
+6. Open `.env` and fill in your values (find the API key and port under **Settings → Local REST API** in Obsidian):
+   ```
+   OBSIDIAN_PROTOCOL=http
+   OBSIDIAN_HOST=127.0.0.1         # IP where Obsidian is running; 127.0.0.1 if local
+   OBSIDIAN_PORT=27123             # Settings → Local REST API → Port
+   OBSIDIAN_API_KEY=abcdefg-123456 # Settings → Local REST API → API Key
+   ```
+
+#### 5. @tobilu/qmd
+
+1. [Download](https://github.com/tobi/qmd).
+2. Register the vault as a qmd collection:
+   ```bash
+   (REPO=$(basename "$PWD") && cd .. && qmd collection add "$REPO")
+   ```
+3. Index and embed the vault (downloads a ~270 MB model on first run; re-run after large ingests):
+   ```bash
+   qmd update && qmd embed
+   ```
+4. Add to `.env`:
+   ```bash
+   grep -q "QMD_INSTALL_PATH" .env || echo "QMD_INSTALL_PATH=$(which qmd)" >> .env
+   ```
 
 ## How to verify MCP tools
 
@@ -146,10 +146,17 @@ Claude Code reads `.mcp.json` on startup. It connects to Obsidian over HTTP and 
 
 You should see both `obsidian` and `qmd` listed with a **connected** status.
 
-| Tool | If it shows an error |
-|---|---|
-| `obsidian` | - [ ] Confirm Obsidian is running with the vault open<br>- [ ] Confirm **"Enable Non-Encrypted (HTTP) Server"** is checked under **Settings → Local REST API**<br>- [ ] Confirm `OBSIDIAN_API_KEY` in `.env` matches the key shown in the plugin settings<br>- [ ] Confirm `OBSIDIAN_PORT` in `.env` matches the port shown in the plugin settings<br>- [ ] Run `direnv allow` again if you recently edited `.env`, then restart the `claude` session |
-| `qmd` | - [ ] Confirm `qmd status` runs without error from the repo root<br>- [ ] Confirm the collection name matches your repo's directory name (run `basename "$PWD"` from the repo root to check)<br>- [ ] Confirm the binary path in `.mcp.json` is correct (`which qmd` to verify) |
+**If `obsidian` shows an error:**
+- [ ] Confirm Obsidian is running with the vault open
+- [ ] Confirm **"Enable Non-Encrypted (HTTP) Server"** is checked under **Settings → Local REST API**
+- [ ] Confirm `OBSIDIAN_API_KEY` in `.env` matches the key shown in the plugin settings
+- [ ] Confirm `OBSIDIAN_PORT` in `.env` matches the port shown in the plugin settings
+- [ ] Run `direnv allow` again if you recently edited `.env`, then restart the `claude` session
+
+**If `qmd` shows an error:**
+- [ ] Confirm `qmd status` runs without error from the repo root
+- [ ] Confirm the collection name matches your repo's directory name (run `basename "$PWD"` from the repo root to check)
+- [ ] Confirm the binary path in `.mcp.json` is correct (`which qmd` to verify)
 
 ## What the folders do
 
