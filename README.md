@@ -121,7 +121,7 @@ OBSIDIAN_API_KEY=abcdefg-123456 # Settings → Local REST API → API Key</code>
 <td>
 <ol style="margin:0; padding-left:0; list-style-position:inside">
 <li><a href="https://github.com/tobi/qmd">Download</a></li>
-<li>Register the vault as a qmd collection:<pre><code>qmd collection add obsidian_vault_system_designs /path/to/this/repo</code></pre></li>
+<li>Register the vault as a qmd collection:<pre><code>qmd collection add $(basename "$PWD") .</code></pre></li>
 <li>Index and embed the vault (downloads a ~270 MB model on first run; re-run after large ingests):<pre><code>qmd update && qmd embed</code></pre></li>
 <li>Add to <code>.env</code>:<pre><code>grep -q "QMD_INSTALL_PATH" .env || echo "QMD_INSTALL_PATH=$(which qmd)" >> .env</code></pre></li>
 </ol>
@@ -149,7 +149,7 @@ You should see both `obsidian` and `qmd` listed with a **connected** status.
 | Tool | If it shows an error |
 |---|---|
 | `obsidian` | - [ ] Confirm Obsidian is running with the vault open<br>- [ ] Confirm **"Enable Non-Encrypted (HTTP) Server"** is checked under **Settings → Local REST API**<br>- [ ] Confirm `OBSIDIAN_API_KEY` in `.env` matches the key shown in the plugin settings<br>- [ ] Confirm `OBSIDIAN_PORT` in `.env` matches the port shown in the plugin settings<br>- [ ] Run `direnv allow` again if you recently edited `.env`, then restart the `claude` session |
-| `qmd` | - [ ] Confirm `qmd status` runs without error from the repo root<br>- [ ] Confirm the collection name matches `obsidian_vault_system_designs`<br>- [ ] Confirm the binary path in `.mcp.json` is correct (`which qmd` to verify) |
+| `qmd` | - [ ] Confirm `qmd status` runs without error from the repo root<br>- [ ] Confirm the collection name matches your repo's directory name (run `basename "$PWD"` from the repo root to check)<br>- [ ] Confirm the binary path in `.mcp.json` is correct (`which qmd` to verify) |
 
 ## What the folders do
 

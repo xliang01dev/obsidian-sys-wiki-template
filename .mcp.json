@@ -6,6 +6,10 @@
       "headers": {
         "Authorization": "Bearer ${OBSIDIAN_API_KEY}"
       }
+    },
+    "qmd": {
+      "command": "${QMD_INSTALL_PATH}",
+      "args": ["mcp"]
     }
   }
 }
