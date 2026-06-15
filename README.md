@@ -1,4 +1,4 @@
-# Self Healing Wiki Template
+# Self Healing Wiki Template for System Design
 
 A self-healing personal knowledge wiki for software system design - architecture patterns, tradeoffs, failure modes, and case studies. Heavily inspired by [Andrej Karpathy's LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f): the idea that an LLM can act as a compiler, turning raw source material into a structured, interlinked, and self-correcting knowledge base that compounds over time. In practice, that means a wiki that actively maintains its own integrity - detecting broken links, merging duplicate pages, surfacing conflicting claims, and connecting orphan notes on each run. The structure converges toward consistency over time rather than drifting toward entropy.
 
