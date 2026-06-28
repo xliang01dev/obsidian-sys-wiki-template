@@ -8,7 +8,7 @@ A self-healing personal knowledge wiki for software system design - architecture
 - [How to run](#how-to-run)
 - [How to install](#how-to-install)
 - [How to verify MCP tools](#how-to-verify-mcp-tools)
-- [What the folders do](#what-the-folders-mean)
+- [What the folders do](#what-the-folders-do)
 
 ## Why Claude + Obsidian + qmd + Git
 
@@ -114,8 +114,8 @@ The skill walks you through each dependency one step at a time - checking what i
 
 #### 4. Obsidian
 
-1. [Download](https://obsidian.md/) and open this repo as a vault.
-2. Install the **Local REST API** community plugin.
+1. [Download](https://obsidian.md/) and set `your_path_to/obsidian-llm-sys-wiki` as an Obsidian vault.
+2. Under **Settings → Community plugins**, disable Safe mode if prompted, click **Browse**, search for **Local REST API**, then install and enable it.
 3. Under **Settings → Local REST API**, enable **"Enable Non-Encrypted (HTTP) Server"** (HTTP required; MCP clients cannot verify the self-signed HTTPS cert).
 4. Note your **API key** and **port** (default: `27123`); each vault should use its own port.
 5. Copy the sample env file:
@@ -132,7 +132,10 @@ The skill walks you through each dependency one step at a time - checking what i
 
 #### 5. @tobilu/qmd
 
-1. [Download](https://github.com/tobi/qmd).
+1. Install ([repo](https://github.com/tobi/qmd)):
+   ```bash
+   npm install -g @tobilu/qmd
+   ```
 2. Register the vault as a qmd collection:
    ```bash
    (REPO=$(basename "$PWD") && cd .. && qmd collection add "$REPO")
