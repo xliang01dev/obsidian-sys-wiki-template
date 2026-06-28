@@ -53,7 +53,23 @@ Then run `/wiki-ingest`, `/wiki-query`, or `/wiki-doctor` depending on what you 
 
 ## How to install
 
-Choose one:
+### Install prerequisites
+
+1. Create your own GitHub repository named `llm-wiki-system-design`.
+2. Clone this repo to a directory on your filesystem, preferably named `llm-wiki-system-design`.
+   ```bash
+   git clone git@github.com:your-username/llm-wiki-system-design.git your_path_to/llm-wiki-system-design
+   ```
+3. After the clone finishes, change into `your_path_to/llm-wiki-system-design` and remove the existing remote named `origin`:
+   ```bash
+   git remote remove origin
+   ```
+4. Reassign `origin` to the GitHub repository you just created:
+   ```bash
+   git remote add origin https://github.com/<your-username>/llm-wiki-system-design.git
+   ```
+
+Choose an install path option:
 
 ### Option 1 - Guided install with `/wiki-setup`
 
