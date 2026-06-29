@@ -1,6 +1,7 @@
 ---
 name: wiki-query
 description: Answer questions from the wiki by treating `wiki/` as the primary knowledge layer, using `raw/` only as supporting evidence when needed, and surfacing gaps, conflicts, and next-page improvements.
+allowed-tools: mcp__qmd__*, mcp__obsidian__*
 ---
 
 # Wiki Query
@@ -28,12 +29,19 @@ Primary targets:
 
 Do not use this skill as the default for unrelated coding or general research tasks.
 
+## Retrieval tools
+
+**Primary: qmd MCP** — use `mcp__qmd__*` tools for all `wiki/` searches when available. The indexed collection name matches the vault root folder name — run `basename "$PWD"` to determine it. Prefer hybrid search (`query`) over keyword-only search, and always fetch full document text before answering — never answer from snippets alone.
+
+**Fallback: Obsidian MCP** — if `mcp__qmd__*` tools are not available (MCP server not connected), fall back to `mcp__obsidian__search_simple` or `mcp__obsidian__search_query`. Do not use `Bash(qmd:*)` as a fallback.
+
 ## Retrieval order
 
-1. Check `wiki/` for canonical pages about the topic.
-2. Check related project folders for context-specific details.
-3. Check `raw/` only if the wiki is incomplete, ambiguous, or needs evidence.
-4. Check `inbox/` only if recent provisional material is directly relevant.
+1. Search `wiki/` using qmd MCP (or obsidian MCP if qmd is unavailable).
+2. Fetch full text of top candidate pages before synthesizing an answer.
+3. Check related project folders for context-specific details.
+4. Check `raw/` only if the wiki is incomplete, ambiguous, or needs evidence.
+5. Check `inbox/` only if recent provisional material is directly relevant.
 
 ## Query rules
 

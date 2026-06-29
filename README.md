@@ -94,6 +94,7 @@ The skill walks you through each dependency one step at a time - checking what i
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code/getting-started) | The CLI used to run the wiki skills |
 | [Obsidian](https://obsidian.md/) | The note-taking app this vault runs inside; must be running for the MCP server to connect |
 | [@tobilu/qmd](https://github.com/tobi/qmd) | On-device hybrid search engine that powers semantic wiki queries |
+| [Python 3](https://docs.python.org/3/using/mac.html) | Runtime for the `wiki-doctor` maintenance scripts |
 
 #### 1. Node.js: [Download v18+](https://nodejs.org/en/download)
 
@@ -148,6 +149,8 @@ The skill walks you through each dependency one step at a time - checking what i
    ```bash
    grep -q "QMD_INSTALL_PATH" .env || echo "QMD_INSTALL_PATH=$(which qmd)" >> .env
    ```
+
+#### 6. Python 3: [Download (official installer, alternative install methods, etc.)](https://docs.python.org/3/using/mac.html)
 
 ## How to verify MCP tools
 

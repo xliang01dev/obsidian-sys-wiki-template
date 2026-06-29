@@ -14,3 +14,7 @@
 # Local Claude settings (machine-specific, may contain secrets)
 .claude/settings.local.json
 .env
+
+# wiki-doctor scratch report
+.claude/tmp-wiki-doctor-report.json
+__pycache__/

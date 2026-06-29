@@ -21,11 +21,11 @@ This skill is for wiki maintenance, not general system debugging.
 
 Primary targets:
 
-- `wiki/` pages
-- links between notes
-- folder index files
-- template references
-- note overlap and contradiction
+- `wiki/` pages and the links between them
+- `wiki/index.md` (for missing index link checks)
+- note overlap and contradiction within `wiki/`
+
+Out of scope: `maintenance/`, `templates/`, `raw/`, `inbox/`, configuration files.
 
 Do not use this skill as the default tool for MCP, CLI, or unrelated configuration troubleshooting.
 
@@ -68,15 +68,64 @@ Do not use this skill as the default tool for MCP, CLI, or unrelated configurati
 - When several notes partially overlap, converge them toward one maintained page.
 - If true consensus is not possible, record the disagreement explicitly rather than pretending it does not exist.
 
+## Lint checklist
+
+Lint passes when all 9 items are resolved or explicitly deferred:
+
+1. **Broken wikilinks** — links with no valid target (repair if intent is obvious, else strip the link syntax)
+2. **Stale/renamed references** — links pointing to a note that moved or was renamed
+3. **Orphan notes** — pages not linked from any index or related page
+4. **Missing index links** — wiki pages not referenced from their folder's index.md
+5. **Thin pages** — content too sparse to stand alone, candidate for merging into a canonical page
+6. **Oversized pages** — content that's grown too large and should be split
+7. **Duplicate or near-duplicate pages** — overlapping content that should converge to one canonical page
+8. **Conflicting claims** — notes that disagree about the same concept (flagged explicitly if unresolved, not silently flattened)
+9. **Weak canonical ownership** — a concept lacking one clear "home" page among several partial explanations
+
 ## Workflow
 
-1. Inspect the target notes, links, and referenced pages.
-2. Classify issues: broken link, stale reference, duplicate content, conflicting claim, orphaned page, or weak canonical ownership.
-3. Repair obvious structural issues first.
-4. Compare overlapping or conflicting notes.
-5. Choose the canonical destination for each concept.
-6. Update the canonical page, trim duplication, and preserve unresolved conflicts where needed.
-7. Summarize what was repaired, merged, removed, or flagged.
+Repeat the following loop until the report is clean or all remaining issues are explicitly deferred.
+
+### Step 1 — Collect data
+
+- If the Obsidian MCP or local API is available: run `wiki-doctor-report.py` against the vault document graph to collect link, orphan, duplicate, and coverage data.
+- If the MCP/API is not available: fetch wiki markdown via filesystem calls and derive the same data manually.
+
+### Step 2 — Generate report
+
+Using the lint checklist as the template, produce a count of violations per category. Record which items are unresolved and which are deferred.
+
+### Step 3 — Fix deterministic issues
+
+Always run `wiki-doctor-fix.py`, even when the report shows zero violations. It applies rule-based fixes and always cleans up the temp report file on exit:
+- broken wikilinks with an obvious target
+- stale/renamed references
+- missing index links
+- dead link markup removal
+
+### Step 4 — Re-run report
+
+Re-run Step 1 and Step 2 to measure what was fixed. The remaining violations are those `wiki-doctor-fix.py` could not resolve.
+
+### Step 5 — Fix probabilistic issues (LLM)
+
+Remaining violations require judgment. Apply the rules in **Safe automatic actions** and **Ask before changing** to decide which to fix directly and which to escalate. Typical probabilistic issues:
+- duplicate or near-duplicate pages (merge vs. keep depends on semantic overlap)
+- conflicting claims (resolve or flag explicitly)
+- thin pages (merge or expand)
+- oversized pages (split)
+- weak canonical ownership (choose canonical home)
+
+### Step 6 — Re-run report
+
+Re-run Step 1 and Step 2.
+
+### Step 7 — Done or loop
+
+- If violations remain: return to Step 1 and repeat.
+- If the report is clean: done. Emit the output summary in the conversation.
+  - If any `wiki/` pages were modified during this run, also write a dated `maintenance/YYYY-MM-DD-lint.md` report (using `templates/template-maintenance.md`) and update `maintenance/index.md`.
+  - If only scripts or non-wiki files were changed, skip the maintenance file — no report needed.
 
 ## Safe automatic actions
 
