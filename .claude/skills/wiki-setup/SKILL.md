@@ -246,7 +246,7 @@ python3 --version
 ```
 
 **What it is:** The Python 3 runtime.
-**Why it is needed:** The `wiki-doctor` skill runs maintenance scripts (`wiki-doctor-report.py`, `wiki-doctor-fix.py`) with `python3`.
+**Why it is needed:** The `wiki-doctor` skill runs maintenance scripts (`wiki_doctor_report.py`, `wiki_doctor_fix.py`) with `python3`.
 
 - If found: confirm the version and move to Completion check.
 - If missing: tell the user to install Python 3 by following https://docs.python.org/3/using/mac.html (official installer, Homebrew, etc.). After they signal it is installed, re-run `python3 --version` to verify before continuing.
