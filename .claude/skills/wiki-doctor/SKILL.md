@@ -88,7 +88,7 @@ Repeat the following loop until the report is clean or all remaining issues are 
 
 ### Step 1 — Collect data
 
-- If the Obsidian MCP or local API is available: run `wiki_doctor_report.py` against the vault document graph to collect link, orphan, duplicate, and coverage data.
+- If the Obsidian MCP or local API is available: run `wiki_doctor_report.py` (in `.claude/scripts/`) against the vault document graph to collect link, orphan, duplicate, and coverage data.
 - If the MCP/API is not available: fetch wiki markdown via filesystem calls and derive the same data manually.
 
 ### Step 2 — Generate report
@@ -97,7 +97,7 @@ Using the lint checklist as the template, produce a count of violations per cate
 
 ### Step 3 — Fix deterministic issues
 
-Always run `wiki_doctor_fix.py`, even when the report shows zero violations. It applies rule-based fixes and always cleans up the temp report file on exit:
+Always run `wiki_doctor_fix.py` (in `.claude/scripts/`), even when the report shows zero violations. It applies rule-based fixes and always cleans up the temp report file on exit:
 - broken wikilinks with an obvious target
 - stale/renamed references
 - missing index links
