@@ -127,6 +127,16 @@ Re-run Step 1 and Step 2.
   - If any `wiki/` pages were modified during this run, also write a dated `maintenance/YYYY-MM-DD-lint.md` report (using `templates/template-maintenance.md`) and update `maintenance/index.md`.
   - If only scripts or non-wiki files were changed, skip the maintenance file — no report needed.
 
+## Fetching page content
+
+Read only what you need — do not bulk-export all wiki pages.
+
+1. **QMD search first** — for each concept or page being analyzed for duplicates, conflicts, or ownership, call `mcp__qmd__query` with semantic sub-queries describing the concept. Retrieve the top 3–5 results to identify which pages are semantically closest. Use `minScore: 0.5` to filter low-confidence matches.
+2. **Targeted reads** — call `mcp__obsidian__vault_read` for pages surfaced as likely candidates by the search, and for any pages you already know are relevant from context.
+3. **Single-file fetch** — if you need a specific page by name rather than by search, use `mcp__qmd__get` with the file path (e.g. `wiki/context-engineering.md`).
+
+Do **not** call `mcp__qmd__multi_get` with `wiki/*.md` — this exports the entire wiki and will exceed context limits.
+
 ## Safe automatic actions
 
 Apply directly when the change is local, low-risk, and reversible:
